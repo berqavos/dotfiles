@@ -1,7 +1,7 @@
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " .vimrc 
 "
-" Last update: Thu 2013-08-15 10:10
+" Last update: Thu 2013-08-15
 "
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "
@@ -52,10 +52,10 @@ endfun
 
 fun! NewFile_Bash()
 	call append(0, "#!/usr/bin/env bash")
-	call append(1, "############")
+	call append(1, "#")
 	call append(2, "# Date=\"" .strftime("%a %Y\-%m\-%d ")."\"")
 	call append(3, "# Author=\"berq\"")
-	call append(4, "############")
+	call append(4, "#")
 endfun
 
 "Autcommands ausführen
