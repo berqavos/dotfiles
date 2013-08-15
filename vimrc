@@ -1,7 +1,7 @@
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" .vimrc berg
+" .vimrc 
 "
-" Last update: Tue 2012-08-14 13:44
+" Last update: Thu 2013-08-15 10:10
 "
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "
@@ -51,10 +51,10 @@ fun! UpdateRcHeader()
 endfun
 
 fun! NewFile_Bash()
-	call append(0, "#!/bin/bash")
+	call append(0, "#!/usr/bin/env bash")
 	call append(1, "############")
-	call append(2, "Date=\"" .strftime("%a %Y\-%m\-%d %R")."\"")
-	call append(3, "Author=\"berq\"")
+	call append(2, "# Date=\"" .strftime("%a %Y\-%m\-%d ")."\"")
+	call append(3, "# Author=\"berq\"")
 	call append(4, "############")
 endfun
 
