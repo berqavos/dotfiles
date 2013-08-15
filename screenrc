@@ -1,0 +1,11 @@
+# ~/.screenrc
+startup_message off
+vbell on
+vbell_msg " *beeep* "
+shell /bin/bash
+activity "%C -> %n%f%t activity!"
+hardstatus alwayslastline "%{BW}Host: %H | %d-%m-%y %c | Load: %l"
+caption always "%{kB}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{kB}%?%+Lw%?"
+autodetach on
+defscrollback 3000
+silencewait 15
