@@ -1,0 +1,150 @@
+set realname="XXX XXX"
+set from=your.name@domain.tld
+set hostname=rohrpost
+alternates ((xxx|yyy)@domain.tld|.*@domain.tld|.*@domain.tld)
+
+set signature=".signature"
+set use_from
+
+#IMAP
+set mail_check=60
+set timeout=15
+#set imap_force_ssl=yes
+set imap_user="XXX"
+#set spoolfile="{localhost}INBOX"
+set spoolfile="imaps://localhost/INBOX"
+#mailboxes +INBOX +INBOX.Sent
+#set record = "{localhost}INBOX.Sent"
+#set record = "imaps://localhost/INBOX.Sent"
+set record = "imaps://localhost/Sent"
+#set folder="imap://localhost"
+set folder="imaps://localhost"
+set imap_authenticators="digest-md5:cram-md5"
+set sendmail="/usr/lib/sendmail"
+unset confirmappend
+set allow_8bit
+set help
+set history=500
+set ignore_list_reply_to
+set reverse_alias
+set reverse_name
+set hdrs
+ignore *
+unignore From To Cc Subject Date Reply-To Organization X-Mailer User-Agent X-Spam-Status
+hdr_order From: Date: To: Cc: Subject:
+unmy_hdr *
+set delete=yes
+# Message Display Options
+set smart_wrap=yes
+set pager_index_lines=6
+set pager_stop=yes
+set markers=no
+# envelope sender must match
+set envelope_from
+# Don't save outgoing attachments
+unset fcc_attach
+# keep fcc's clear of signatures and encryption
+set fcc_clear
+# I hate beep
+unset beep
+# don't mark messages old
+set nomark_old
+# Replying
+unset reply_self
+# qoute original text when replying to mail
+set include=yes
+set attribution="On %d, %n wrote:"
+set attribution="On %d, %n wrote:"
+set bounce_delivered=yes
+set indent_str="> "
+# Forwarding
+set forward_format="Fw: %s" # subject in forwarded messages
+set quote_regexp="^([A-Za-z ]+>|[]%>:|}-][]>:|}-]*)"
+set reply_regexp='^((re|antw.?|antwort(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*'
+set mime_forward=ask-yes
+# Composing
+#set editor="vim -c 'set textwidth=77' -c '/^$'"
+#set editor="vi -c 'set textwidth=77' '+/^$'"
+set editor="vi -c 'set textwidth=77'"
+set fast_reply=yes
+#set postpone=ask-yes
+#set postponed="=postponed"
+set abort_nosubject=no
+set abort_unmodified=ask-yes
+set autoedit
+# don't ask cc and bcc before editing
+unset askcc
+unset askbcc
+#set charset="iso-8859-15" set charset=utf-8
+set charset=utf-8
+set edit_headers
+# Index Menu
+folder-hook . set sort=threads
+set sort_aux=date-sent
+set strict_threads=no
+set wrap_search=yes
+set mark_old=no
+set collapse_unread=no
+set uncollapse_jump=yes
+#set index_format="%4C %Z %{%b %d %H:%M} %-15.15F (%4l) %s %?M?(#%02M)&(%4l)?"
+set index_format="%4C %Z %{%b %d %H:%M} %-15.15F (%4l) %s %?M?(#%02M)&(%2l)?"
+set date_format="%d/%m/%y %H:%M %Z"
+
+# color patterns for mutt
+color normal     default       default # normal text
+color indicator  green         white # actual message
+color tree       brightmagenta  default # thread arrows
+color status     yellow         default # status line
+color error      brightred      default # errors
+color message    magenta        default # info messages
+color signature  magenta        default # signature
+color attachment brightyellow   red     # MIME attachments
+color search     brightyellow   red     # search matches
+color tilde      brightmagenta  default # ~ at bottom of msg
+color markers    red            default # + at beginning of wrapped lines
+color hdrdefault cyan           default # default header lines
+color bold       red            default # hiliting bold patterns in body
+color underline  green          default # hiliting underlined patterns in body
+color quoted     cyan           default # quoted text
+color quoted1    magenta        default
+color quoted2    red            default
+color quoted3    green          default
+color quoted4    magenta           default
+color quoted5    cyan           default
+color quoted6    magenta        default
+color quoted7    red            default
+color quoted8    green          default
+color quoted9    cyan           default
+color body   cyan  default  "((ftp|http|https)://|news:)[^ >)\"\t]+"
+color body   cyan  default  "[-a-z_0-9.+]+@[-a-z_0-9.]+"
+color body   red   default  "(^| )\\*[-a-z0-9*]+\\*[,.?]?[ \n]"
+color body   green default  "(^| )_[-a-z0-9_]+_[,.?]?[\n]"
+color body   red   default  "(^| )\\*[-a-z0-9*]+\\*[,.?]?[ \n]"
+color body   green default  "(^| )_[-a-z0-9_]+_[,.?]?[ \n]"
+color header  blue   default  "^From"
+color header  green   default  "^Subject"
+color index  cyan  default  ~F         # Flagged
+color index  red   yellow  ~N         # New
+color index  magenta    default  ~T         # Tagged
+color index  cyan       default  ~D         # Deleted
+# Don't ask to move read messages to mbox on exit
+set move=no
+# mailinglists
+#lists debian-security-announce
+subscribe intern@lists.metalab.at
+subscribe metalab@lists.metalab.at
+subscribe luga@luga.at
+#macro index \Cr "<tag-pattern>~N\n<tag-prefix><clear-flag>N" "Mark all new messages as read"
+#macro index <F10> ":source ~/.mutt/profiles/bq\n" "Load default profile"
+#macro pager <F10> ":source ~/.mutt/profiles/bq\n" "Load default profile"
+#macro index <F12> ":source ~/.mutt/profiles/mavisu\n" "Load mavisu profile"
+#macro pager <F12> ":source ~/.mutt/profiles/mavisu\n" "Load mavisu profile"
+#
+## Set and source alias file
+set alias_file=~/.mutt/mutt-aliases
+source $alias_file
+set sort_alias=alias
+set reverse_alias=yes
+auto_view text/html
+#
+#set ispell="aspell -e -c"
