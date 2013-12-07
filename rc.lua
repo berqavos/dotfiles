@@ -44,7 +44,7 @@ beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 --terminal = "x-terminal-emulator"
-terminal = "rxvt-unicode"
+terminal = "xfce4-terminal"
 --editor = os.getenv("EDITOR") or "editor"
 editor = "vim"
 editor_cmd = terminal .. " -e " .. editor
@@ -394,12 +394,37 @@ client.add_signal("focus", function(c) c.border_color = beautiful.border_focus e
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
+
+function run_once(cmd)
+  findme = cmd
+  firstspace = cmd:find(" ")
+  if firstspace then
+    findme = cmd:sub(0, firstspace-1)
+  end
+  awful.util.spawn_with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null || (" .. cmd .. ")")
+end
+
+run_once("xscreensaver -no-splash")
+run_once("xfc4-power-manager")
+run_once("hamster-time-tracker",nil,nil, 2)
+run_once("gajim",nil,nil, 2)
+run_once("conky")
+run_once("xrdb -merge ~/.Xresources")
+run_once("wicd-client",nil,"/usr/bin/python2 -O /usr/share/wicd/gtk/wicd-client.py")
+
 -- {{{ Autostartup
-awful.util.spawn_with_shell("synclient TouchpadOff=1")
-awful.util.spawn_with_shell("nm-applet")
-awful.util.spawn_with_shell("xscreensaver -no-splash")
-awful.util.spawn_with_shell("xfce4-power-manager")
-awful.util.spawn_with_shell("xrdb -merge ~/.Xresources")
+--awful.util.spawn_with_shell("synclient TouchpadOff=1")
+--awful.util.spawn_with_shell("nm-applet")
+--
+--awful.util.spawn_with_shell("hamster-time-tracker")
+--awful.util.spawn_with_shell("xscreensaver -no-splash")
+--awful.util.spawn_with_shell("xfce4-power-manager")
+--awful.util.spawn_with_shell("xrdb -merge ~/.Xresources")
+--awful.util.spawn_with_shell("gajim")
+--awful.util.spawn_with_shell("conky")
+--awful.util.spawn_with_shell("wicd-client")
+
+
 -- awful.util.spawn_with_shell("rxvt-unicode")
 -- os.execute("xscreensaver -no splash &")
 -- os.execute("nm-applet &")
