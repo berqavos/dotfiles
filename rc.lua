@@ -410,7 +410,7 @@ run_once("hamster-time-tracker",nil,nil, 2)
 run_once("gajim",nil,nil, 2)
 run_once("conky")
 run_once("xrdb -merge ~/.Xresources")
-run_once("wicd-client",nil,"/usr/bin/python2 -O /usr/share/wicd/gtk/wicd-client.py")
+run_once("wicd-client --tray")
 
 -- {{{ Autostartup
 --awful.util.spawn_with_shell("synclient TouchpadOff=1")
