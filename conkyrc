@@ -201,8 +201,9 @@ TEXT
 $nodename - $sysname $kernel on $machine
 $stippled_hr
 ${color lightgrey}Uptime:$color $uptime ${color lightgrey}- Load:$color $loadavg
-${color lightgrey}CPU Usage:${color #fffeee} ${cpu}% ${cpubar}
-${color black}${cpugraph 000000 5000a0}
+${color lightgrey}CPU0:${color #fffeee} ${cpu cpu0}% ${cpubar}
+${color lightgrey}CPU1:${color #fffeee} ${cpu cpu1}% ${cpubar}
+#${color black}${cpugraph 000000 5000a0}
 ${color lightgrey}RAM Usage:$color $mem/$memmax - $memperc% $membar
 ${color lightgrey}Swap Usage:$color $swap/$swapmax - $swapperc% ${swapbar}
 ${color lightgrey}Processes:$color $processes  ${color grey}Running:$color $running_processes
@@ -227,5 +228,6 @@ ${color}Mem usage
 ${color #ddaa00} ${top_mem name 1} ${top_mem pid 1} ${top_mem cpu 1} ${top_mem mem 1}
 ${color lightgrey} ${top_mem name 2} ${top_mem pid 2} ${top_mem cpu 2} ${top_mem mem 2}
 ${color lightgrey} ${top_mem name 3} ${top_mem pid 3} ${top_mem cpu 3} ${top_mem mem 3}
-${color lightgrey}Battery: ${battery}
+${color lightgrey}Battery: ${battery} | ${battery_time BAT0}
+#${battery_bar BAT0}
 ${color lightgrey}Workspace: ${desktop}
