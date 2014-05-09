@@ -1,5 +1,5 @@
-*xterm*faceName: DejaVu Sans Mono:fontsize=12:antialias=true:hinting=true
-!*xterm*faceSize: 12
+*xterm*faceName: DejaVu Sans Mono:antialias=true:hinting=true
+*xterm*faceSize: 9 
 !*xterm*faceName: Terminus:style=Regular:fontsize=10:antialias=true:hinting:true
 *xterm*loginShell: true
 *xterm*scrollBar: false
