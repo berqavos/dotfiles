@@ -1,3 +1,3 @@
-rcfiles
+dotfiles
 =======
-some rc files
+some dotfiles
