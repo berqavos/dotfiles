@@ -9,3 +9,4 @@ caption always "%{kB}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{kB}%?%+Lw%?"
 autodetach on
 defscrollback 3000
 silencewait 15
+escape ^Bb
