@@ -104,7 +104,7 @@ ${color lightgrey}Networking:
 IP:${addr eth0}
  Down:${color #8844ee} ${downspeed eth0} k/s${color lightgrey} ${offset 70}Up:${color #22ccff} ${upspeed eth0} k/s
 ${color black}${downspeedgraph eth0 32,150 ff0000 0000ff} $alignr${color black}${upspeedgraph eth0 32,150 0000ff ff0000}
-IP:${addr wlan0} Qualtiy:${wireless_link_qual_perc wlan0}% ESSID:${wireless_essid wlan0}
+${color lightgrey}IP:${addr wlan0} Qualtiy:${wireless_link_qual_perc wlan0}% ESSID:${wireless_essid wlan0}
  Down:${color #8844ee} ${downspeed wlan0} k/s${color lightgrey} ${offset 70}Up:${color #22ccff} ${upspeed wlan0} k/s
 ${color black}${downspeedgraph wlan0 32,150 ff0000 0000ff} $alignr${color black}${upspeedgraph wlan0 32,150 0000ff ff0000}
 ${color lightgrey}File systems:
