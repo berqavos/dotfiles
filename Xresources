@@ -4,3 +4,7 @@
 *xterm*loginShell: true
 *xterm*scrollBar: false
 *xterm*metaSendsEscape: true
+*xterm*background: black
+*xterm*cursorColor: lightgrey
+*xterm*foreground: white
+*xterm*saveLines: 1024
