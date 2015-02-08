@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+############
+# Date="Sam 2015-02-07"
+# Author="berq"
+############
+# pm-utils are mandatory
+# apt-get install pm-utils
+# sudo NOPASSWD for pm-suspend, reboot, poweroff
+
+lock() {
+    i3lock -c 000000
+}
+
+case "$1" in
+    lock)
+        lock
+        ;;
+    logout)
+        i3-msg exit
+        ;;
+    suspend)
+        lock && sudo /usr/sbin/pm-suspend
+        ;;
+    reboot)
+        sudo /sbin/reboot 
+        ;;
+    shutdown)
+        sudo /sbin/poweroff 
+        ;;
+    *)
+        echo "Usage: $0 {lock|logout|suspend|reboot|shutdown}"
+        exit 2
+esac
+
+exit 0
+

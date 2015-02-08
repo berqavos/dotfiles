@@ -146,21 +146,28 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+        # status_command i3status
+	status_command i3status --config ~/.i3/i3status.conf
 }
 
-# scratchpad
-bindsym $mod+m move scratchpad
-bindsym $mod+o scratchpad show
+# bqion: suspend, shutdown, reboot
+set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
 
-# autostart
-exec setxkbmap -option grp:switch,grp:alt_space_toggle us,de
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Pause mode "$mode_system"
 
-# Screen Lock
-bindsym $mod+Control+l exec "slock"
-
-# Volume control
-bindsym XF86AudioRaiseVolume exec "amixer set Master 2+"
-bindsym XF86AudioLowerVolume exec "amixer set Master 2-"
-bindsym XF86AudioMute exec "amixer set Master toggle"
-
+# bqion: some handy programs
+exec --no-startup-id synclient TapButton3=2
+exec --no-startup-id syndaemon -d -i 2.0
+exec --no-startup-id xbacklight -dec 50
+exec --no-startup-id wicd-gtk -t
+exec --no-startup-id xsetroot -solid "#333333"
