@@ -1,7 +1,7 @@
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " .vimrc 
 "
-" Last update: Thu 2013-08-15
+" Last update: Mon 2014-11-10 21:54
 "
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "
@@ -17,7 +17,6 @@ set number
 " koordinatenanzeige in statuszeile aktivieren
 set ruler
 
-abbreviate begr berg
 " abbreviate ä &auml; 
 set fileencoding=utf-8
 set encoding=utf-8
@@ -32,14 +31,10 @@ autocmd BufNewFile,BufRead */.postponed/* set filetype=mail
 autocmd BufNewFile,BufRead *.txt set filetype=human
 augroup END
 
-autocmd FileType mail,human set formatoptions+=t textwidth=72
-autocmd FileType c,cpp,slang set cindent
-autocmd FileType c set formatoptions+=ro
-autocmd FileType perl set smartindent
-autocmd FileType perl set expandtab
-autocmd FileType css set smartindent
-autocmd FileType html set formatoptions+=tl
-autocmd FileType html,css set noexpandtab tabstop=2
+autocmd FileType mail,human set formatoptions+=t textwidth=100
+autocmd FileType c,cpp,slang set cindent formatoptions+=ro
+autocmd FileType perl set smartindent expandtab
+autocmd FileType html,css,php,js set expandtab shiftwidth=2 smartindent formatoptions+=tl
 autocmd FileType make set noexpandtab shiftwidth=8
 
 " Update .*rc header
@@ -59,7 +54,7 @@ fun! NewFile_Bash()
 endfun
 
 "Autcommands ausführen
-augroup berg
+augroup bq 
 	autocmd!
 	"Header update für rc-files
 	autocmd BufWritePre *vimrc :call UpdateRcHeader()
@@ -92,11 +87,16 @@ set whichwrap+=<,>,[,]
 set wildmenu
 
 " Spaltenbreite Faltungsanzeige
+
+"set foldmethod=syntax
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=1
+set foldtext=foldtext()
 set foldcolumn=2
 set foldcolumn=0
-set foldmethod=syntax
 set foldignore=#
-set foldtext=foldtext()
 
 " spell check
 "set spelllang=de,en
