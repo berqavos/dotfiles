@@ -1,7 +1,7 @@
 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " .vimrc 
 "
-" Last update: Mon 2014-11-10 21:54
+" Last update: Mon 2015-05-25 11:02
 "
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 "
@@ -16,10 +16,53 @@ set number
 
 " koordinatenanzeige in statuszeile aktivieren
 set ruler
-
-" abbreviate ä &auml; 
 set fileencoding=utf-8
 set encoding=utf-8
+
+"Modi anzeigen
+set showmode
+set showcmd
+
+"Inkrm. Suche
+set incsearch
+
+" !case-sensetive || der Begriff hat Großbuchstaben
+set ignorecase
+set smartcase
+
+" highlight search
+set hlsearch
+
+" Zeige Klammern oeffnend & schlieszend
+set showmatch
+set mat=5 " show matching brackets for 0.5 sec
+
+" f..k error noises
+set noerrorbells
+set visualbell t_vb=
+
+" wrap on theses
+set whichwrap+=<,>,[,]
+
+" tab complete menu
+set wildmenu
+
+" Spaltenbreite Faltungsanzeige
+"set foldcolumn=2
+set foldcolumn=0
+set foldmethod=syntax
+set foldignore=#
+set foldtext=foldtext()
+
+" tab to spaces
+set expandtab
+set tabstop=2
+set shiftwidth=2
+
+set t_Co=256
+
+"abbreviate begr berg
+" abbreviate ä &auml; 
 
 " enable filetype detection:
 filetype on
@@ -31,12 +74,13 @@ autocmd BufNewFile,BufRead */.postponed/* set filetype=mail
 autocmd BufNewFile,BufRead *.txt set filetype=human
 augroup END
 
-autocmd FileType mail,human set formatoptions+=t textwidth=100
+autocmd FileType mail,human set formatoptions+=t textwidth=80
+"autocmd FileType  set formatoptions+=t textwidth=80
 autocmd FileType c,cpp,slang set cindent formatoptions+=ro
 autocmd FileType perl set smartindent expandtab
-autocmd FileType html,css,php,js set expandtab shiftwidth=2 smartindent formatoptions+=tl
+autocmd FileType html,css set noexpandtab tabstop=2 formatoptions+=tl smartindent
 autocmd FileType make set noexpandtab shiftwidth=8
-
+    
 " Update .*rc header
 fun! UpdateRcHeader()
     let l:c=col(".")
@@ -54,53 +98,17 @@ fun! NewFile_Bash()
 endfun
 
 "Autcommands ausführen
-augroup bq 
+augroup berg
 	autocmd!
 	"Header update für rc-files
 	autocmd BufWritePre *vimrc :call UpdateRcHeader()
 	autocmd BufNewFile *.sh call NewFile_Bash()
 augroup END
 
-"Modi anzeigen
-set showmode
-set showcmd
-
-"Inkrm. Suche
-set incsearch
-" !case-sensetive || der Begriff hat Großbuchstaben
-set ignorecase
-set smartcase
-" highlight search
-set hlsearch
-
-" Zeige Klammern oeffnend & schlieszend
-set showmatch
-
-" f..k error noises
-set noerrorbells
-set visualbell t_vb=
-
-" wrap on theses
-set whichwrap+=<,>,[,]
-
-" tab complete menu
-set wildmenu
-
-" Spaltenbreite Faltungsanzeige
-
-"set foldmethod=syntax
-set foldmethod=indent
-set foldnestmax=10
-set nofoldenable
-set foldlevel=1
-set foldtext=foldtext()
-set foldcolumn=2
-set foldcolumn=0
-set foldignore=#
-
 " spell check
-"set spelllang=de,en
-"set spellfile=~/.vim/spell.de.add
+"set spelllang=en_gb
+set spellfile=~/.vim/spell.en.add
+:map <F5> :setlocal spell! spelllang=en_gb<CR>
 "au BufNewFile,BufRead /tmp/mutt*  setf mail
 "au BufNewFile,BufRead /tmp/mutt*  set ai et tw=72 spell
 ":map <F12> :w!<CR>:!aspell --lang=de,en check %<CR>:e! %<CR>
