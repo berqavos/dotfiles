@@ -3,9 +3,6 @@
 # Date="Sam 2015-02-07"
 # Author="berq"
 ############
-# pm-utils are mandatory
-# apt-get install pm-utils
-# sudo NOPASSWD for pm-suspend, reboot, poweroff
 
 lock() {
     i3lock -c 000000
@@ -19,13 +16,16 @@ case "$1" in
         i3-msg exit
         ;;
     suspend)
-        lock && sudo /usr/sbin/pm-suspend
+        #lock && sudo /usr/sbin/pm-suspend
+        lock && systemctl suspend
         ;;
     reboot)
-        sudo /sbin/reboot 
+        #sudo /sbin/reboot 
+	systemctl reboot
         ;;
     shutdown)
-        sudo /sbin/poweroff 
+        #sudo /sbin/poweroff 
+	systemctl poweroff
         ;;
     *)
         echo "Usage: $0 {lock|logout|suspend|reboot|shutdown}"
@@ -33,4 +33,3 @@ case "$1" in
 esac
 
 exit 0
-
