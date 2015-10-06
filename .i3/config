@@ -215,7 +215,7 @@ new_float 1pixel
 
 # scratchpad
 for_window [instance="scratchpad"] move window to scratchpad, scratchpad show
-bindsym $mo+m exec --no-startup-id uxterm -name scratchpad -e mocp
+bindsym $mod+m exec --no-startup-id uxterm -name scratchpad -e mocp
 
 # bq: some handy programs
 #assign [class="tilda"] 2
