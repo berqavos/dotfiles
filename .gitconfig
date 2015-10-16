@@ -1,0 +1,15 @@
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch -av
+  mnf = merge --no-ff
+  sr = remote -v
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  di = diff
+  t = tag
+  rh = reset HEAD
+  cp = cherry-pick
+  t = tag
+# create release
+  r = push --tags
