@@ -18,14 +18,15 @@ set $mod Mod4
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-#font pango:DejaVu Sans Mono 8
-font pango:opensans 7 
+#font pango:DejaVu Sans Mono 8 
+font pango:Monospace 8 
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec lxterminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -87,6 +88,11 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# bq: new_window settings
+new_window 1pixel
+new_float 1pixel
+#hide_edge_borders vertical
+
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -118,33 +124,13 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# sound
 bindsym XF86AudioRaiseVolume exec amixer -q sset Master 5%+ unmute
 bindsym XF86AudioLowerVolume  exec amixer -q sset Master 5%- unmute
 bindsym XF86AudioMute exec amixer -q sset Master toggle
 # backlight
-bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5
+ bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 10
+ bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5
 
-#color
-
-# color defines for zenburn styled i3
-set $bg     #2c2c2e
-set $fg     #9f9f9f
-set $hi     #efef8f
-set $ac     #a0afa0
-set $tx     #040404
-set $ia     #8f8f8f
-set $be     #8faf9f
-set $yw     #ccdc90
-set $gn     #88b090
-set $rd     #e89393
-
-# set some nice colors      border     background  text
-client.focused              $ac        $ac         $tx
-client.unfocused            $bg        $bg         $ia
-client.focused_inactive     $bg        $bg         $ac
-client.urgent               $rd        $rd         $tx
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -172,24 +158,46 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# color defines for zenburn styled i3
+set $bg     #2c2c2e
+set $fg     #9f9f9f
+set $hi     #efef8f
+set $ac     #a0afa0
+set $tx     #040404
+set $ia     #8f8f8f
+set $be     #8faf9f
+set $yw     #ccdc90
+set $gn     #88b090
+set $rd     #e89393
+
+# set some nice colors      border     background  text
+client.focused              $ac        $ac         $tx
+client.unfocused            $bg        $bg         $ia
+client.focused_inactive     $bg        $bg         $ac
+client.urgent               $rd        $rd         $tx
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
+
 bar {
+	position top
         # status_command i3status
 	status_command i3status --config ~/.i3/i3status.conf
- colors {
-        background          $bg
-        statusline          $fg
-        separator           $hi
-        focused_workspace   $gn        $bg        $ac
-        active_workspace    $gn        $ac        $tx
-        inactive_workspace  $bg        $bg        $ia
-        urgent_workspace    $rd        $bg        $ac
-    }
-
+	colors {
+	     background          $bg
+	     statusline          $fg
+	     separator           $hi
+	     focused_workspace   $gn        $bg        $ac
+	     active_workspace    $gn        $ac        $tx
+	     inactive_workspace  $bg        $bg        $ia
+	     urgent_workspace    $rd        $bg        $ac
+	 }
 }
 
-# bqion: suspend, shutdown, reboot
+# for zsh but without completion
+#bindsym $mod+p exec $(print -lo ${commands:t} | dmenu -p Command) 
+
+# bkju: suspend, shutdown, reboot
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id i3exit lock, mode "default"
@@ -202,28 +210,19 @@ mode "$mode_system" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+p mode "$mode_system"
-#bqion window style
-# hide_edge_borders  <none|vertical|horizontal|both>
-hide_edge_borders both
-# 
-# new_window <normal|1pixel|none|pixel>
-new_window  1pixel
-#
-# new_float <normal|1pixel|none|pixel>
-new_float 1pixel
-
-# scratchpad
-for_window [instance="scratchpad"] move window to scratchpad, scratchpad show
-bindsym $mod+m exec --no-startup-id uxterm -name scratchpad -e mocp
+bindsym $mod+End mode "$mode_system"
 
 # bq: some handy programs
-#assign [class="tilda"] 2
-#exec --no-startup-id synclient TapButton3=2
-#exec --no-startup-id syndaemon -d -i 2.0
-#exec --no-startup-id xbacklight -dec 50
-exec --no-startup-id wicd-gtk -t
+exec --no-startup-id synclient TapButton3=2 TouchpadOff=1
+#exec --no-startup-id syndaemon -d -i 1.0
+#exec --no-startup-id xbacklight -dec 20 
+# desktop image
+#exec --no-startup-id feh --bg-fill ~/Pictures/Dark-pattern.jpg
 exec --no-startup-id xsetroot -solid "#333333"
-exec --no-startup-id xscreensaver -no-splash
-exec --no-startup-id /usr/bin/setxkbmap -option 'grp:alt_space_toggle' -layout us,de 
-exec --no-startup-id /home/bq/scripts/screen.sh
+#
+exec --no-startup-id redshift -c .config/redshift.conf
+#exec --no-startup-id wicd-gtk -t
+exec --no-startup-id nm-applet
+#exec --no-startup-id setxkbmap -layout us,de
+#exec --no-startup-id setxkbmap -option 'grp:alt_space_toggle'
+
