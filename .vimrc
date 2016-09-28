@@ -1,124 +1,86 @@
-"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" .vimrc
-"
-" Last update: Mon 2015-05-25
-"
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-"
-" !kompatibles Verhalten
 set nocompatible
+set number
+set ruler
+set fileencoding=utf-8
+set encoding=utf-8
+set showmode
+set showcmd
+set incsearch
+set ignorecase
+set smartcase
+set hlsearch
+set showmatch
+set noerrorbells
+set visualbell t_vb=
+set whichwrap+=<,>,[,]
+set wildmenu
+set wildmode=list:longest,full
+set expandtab       " use spaces instead of tabs
+set autoindent      " autoindent based on line above, works most of the time
+set smartindent     " smarter indent for C-like languages
+set shiftwidth=4    " when reading, tabs are 4 spaces
+set softtabstop=4   " in insert mode, tabs are 4 spaces
+set textwidth=80
+set laststatus=2    " needed for lightline status
+" don't unload buffers, instead stay in the background
+" http://stackoverflow.com/questions/102384/using-vims-tabs-like-buffers
+set hidden
+set autoread " auto re-read file if it has changed
 
-" syntax hervorhebung
+" Spaltenbreite Faltungsanzeige
+"set foldcolumn=2
+"set foldcolumn=0
+"set foldmethod=syntax
+"set foldignore=#
+"set foldtext=foldtext()
+
+" use <C-Space> for Vim's keyword autocomplete
+"  ...in the terminal
+inoremap <Nul> <C-n>
+
+filetype off
+" --- PLUGIN CONFIGURATION ---
+
+"initiate Vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" start plugin defintion
+Plugin 'scrooloose/nerdtree'
+Plugin 'vim-scripts/L9'
+Plugin 'vim-scripts/FuzzyFinder'
+Plugin 'vim-scripts/yaml.vim'
+Plugin 'itchyny/lightline.vim'      
+Plugin 'Lokaltog/vim-easymotion'    
+Plugin 'tpope/vim-surround'         
+call vundle#end()            " required for vundle
+
+" --- PLUGIN CONFIGURATION END ---
+
+" enable filetype detection:
+filetype plugin indent on
 syntax on
 set t_Co=256
 
-" zeilennummern
-set number
+" Syntastic Settings
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list = 2
+let g:syntastic_enable_signs = 1
 
-" koordinatenanzeige in statuszeile aktivieren
-set ruler
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
 
-"abbreviate begr berg
-" abbreviate ä &auml; 
-set fileencoding=utf-8
-set encoding=utf-8
+" Go Syntax Stuff
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_list_type = "quickfix"
 
-"Modi anzeigen
-set showmode
-set showcmd
-
-"Inkrm. Suche
-set incsearch
-" !case-sensetive || der Begriff hat Großbuchstaben
-set ignorecase
-set smartcase
-" highlight search
-set hlsearch
-
-" Zeige Klammern oeffnend & schlieszend
-set showmatch
-
-" f..k error noises
-set noerrorbells
-set visualbell t_vb=
-
-" wrap on theses
-set whichwrap+=<,>,[,]
-
-" tab complete menu
-set wildmenu
-
-" Spaltenbreite Faltungsanzeige
-set foldcolumn=2
-set foldcolumn=0
-set foldmethod=syntax
-set foldignore=#
-set foldtext=foldtext()
-
-" pathogen
-execute pathogen#infect()
-
-" syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" enable filetype detection:
-filetype on
-filetype indent on
-filetype plugin on
-
-" NerdTree
-"autocmd vimenter * NERDTree
-" spell check
-"set spelllang=de,en
-:map <F5> :setlocal spell! spelllang=en_gb<CR>
-set spellfile=~/.vim/spell.en.add
-"au BufNewFile,BufRead /tmp/mutt*  setf mail
-"au BufNewFile,BufRead /tmp/mutt*  set ai et tw=72 spell
-":map <F12> :w!<CR>:!aspell --lang=de,en check %<CR>:e! %<CR>
-
-augroup filetype
-autocmd BufNewFile,BufRead */.postponed/* set filetype=mail
-autocmd BufNewFile,BufRead *.txt set filetype=human
-augroup END
-
-autocmd FileType mail,human set formatoptions+=t textwidth=72
-autocmd FileType c,cpp,slang set cindent
-autocmd FileType c set formatoptions+=ro
-autocmd FileType perl set smartindent
-autocmd FileType perl set expandtab
-autocmd FileType css set smartindent
-autocmd FileType html set formatoptions+=tl
-autocmd FileType html,css set noexpandtab tabstop=2
-autocmd FileType make set noexpandtab shiftwidth=8
-autocmd FileType rst set noexpandtab tabstop=2
-
-" Update .*rc header
-fun! UpdateRcHeader()
-    let l:c=col(".")
-    let l:l=line(".")
-    1,4s-\(Last update:\).*-\="Last update: ".strftime("%a %Y\-%m\-%d")-
-    call cursor(l:l, l:c)
-endfun
-
-fun! NewFile_Bash()
-	call append(0, "#!/usr/bin/env bash")
-	call append(1, "############")
-	call append(2, "# Date=\"" .strftime("%a %Y\-%m\-%d")."\"")
-	call append(3, "# Author=\"berq\"")
-	call append(4, "############")
-endfun
-
-"Autcommands ausführen
-augroup berg
-	autocmd!
-	"Header update für rc-files
-	autocmd BufWritePre *vimrc :call UpdateRcHeader()
-	autocmd BufNewFile *.sh call NewFile_Bash()
-augroup END
+" map FuzzyFinder
+noremap <leader>b :FufBuffer<cr>
+noremap <leader>f :FufFile<cr>
