@@ -72,8 +72,15 @@ au BufRead,BufNewFile *.py,*.pyw,*.yml,*.js,*.md match BadWhitespace /\s\+$/
 command Yamllint !yamllint %
 nnoremap <leader>l :Yamllint<cr>
 
+" minibuf
+map <C-m> :MBEToggle<CR>
+
 " youcompleteme
 let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " Syntastic Settings
@@ -85,23 +92,24 @@ let g:syntastic_enable_signs = 1
 let g:deoplete#enable_at_startup = 1
 
 " map FuzzyFinder
-noremap <leader>b :FufBuffer<cr>
-noremap <leader>f :FufFile<cr>
+noremap <leader>f :FZF<cr>
 
 " first go to the previous buffer, then delete the last buffer
 nnoremap <leader>q :w\|bd<cr>
 
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'}
+"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'}
 Plug 'vim-scripts/L9'
-"Plug 'vim-scripts/FuzzyFinder'
 Plug 'vim-scripts/yaml.vim'
 Plug 'vim-scripts/Jinja'
 Plug 'Rykka/riv.vim'
 "Plug 'itchyny/lightline.vim'      
 "Plug 'Lokaltog/vim-easymotion'    
 "Plug 'tpope/vim-surround'  
+"Plug 'SirVer/ultisnips'
+"Plug 'majutsushi/tagbar'
+Plug 'fholgado/minibufexpl.vim'
 Plug 'tpope/vim-fugitive'  
 Plug 'avakhov/vim-yaml'
 Plug 'junegunn/fzf.vim'
